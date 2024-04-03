@@ -21,6 +21,7 @@ public class App {
             System.out.println("elija una opcion");
             System.out.println("1. ingresar un cliente");
             System.out.println("2. listar los clientes");
+            System.out.println("3. Actualizar dinero de un cliente");
             System.out.println("0. salir");
 
             opcion = scanner_opcion.nextByte();
@@ -30,6 +31,9 @@ public class App {
                     break;
                 case 2:
                     listar_clientes(); // Llamar al método para listar los clientes
+                    break;
+                case 3:
+                    actualizar_dinero_ahorrado(); // Llamar al método para actualizar el dinero ahorrado de un cliente
                     break;
                 
             }
@@ -92,4 +96,22 @@ public class App {
             System.out.println("Cliente " + (i + 1) + ": " + mis_clientes.get(i).getNombre() + " y su ahorro es: " + mis_clientes.get(i).getAhorro());
         }
     }
+
+    // Método para actualizar el dinero ahorrado de un cliente
+    public static void actualizar_dinero_ahorrado() {
+        System.out.println("Ingrese su nombre para actualizar su ahorro");
+        Scanner scanneract = new Scanner(System.in);
+        String comparar = scanneract.nextLine();
+
+         // Buscar al cliente por nombre y actualizar su ahorro
+        for (int i = 0; i < mis_clientes.size(); i++) {
+            if (comparar.equals(mis_clientes.get(i).getNombre())) {
+                System.out.println("Ingrese la cantidad de dinero que desea agregar a su ahorro");
+                int dinero = scanneract.nextInt();
+                mis_clientes.get(i).setAhorro(mis_clientes.get(i).getAhorro() + dinero);
+                System.out.println("El nuevo ahorro de " + mis_clientes.get(i).getNombre() + " es de " + mis_clientes.get(i).getAhorro() + " cop");
+            }
+    }
+
+}
 }
