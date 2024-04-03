@@ -12,7 +12,7 @@ public class App {
     public static void main(String[] args) throws Exception {
 
         Scanner scanner_opcion = new Scanner(System.in);
-        byte opcion;
+        byte opcion; // Variable para almacenar la opción seleccionada por el usuario
 
         // Bucle para mostrar el menú de opciones
         do {
@@ -20,36 +20,35 @@ public class App {
             // Mostrar el menú de opciones al usuario
             System.out.println("elija una opcion");
             System.out.println("1. ingresar un cliente");
+            System.out.println("2. listar los clientes");
+            System.out.println("0. salir");
 
             opcion = scanner_opcion.nextByte();
             switch (opcion) {
                 case 1:
-                    persona();
+                    persona(); // Llamar al método para ingresar un nuevo cliente 
                     break;
-
-
-
+                case 2:
+                    listar_clientes(); // Llamar al método para listar los clientes
+                    break;
+                
             }
-
-
-
-
-        } while (opcion != 0);
+        } while (opcion != 0); //Condición para cerrar el bucle
     }
 
-    static List<Cliente> mis_clientes = new ArrayList<Cliente>(); // Lista para almacenar los clientes
+    // Lista para almacenar los clientes
+    static List<Cliente> mis_clientes = new ArrayList<Cliente>(); 
 
     // Método para ingresar un cliente
-
     public static void persona(){
 
+        // Crear un nuevo cliente
         Cliente cliente1 = new Cliente();
 
         // Solicitar y establecer los datos del cliente
 
-        // Nombre del Cliente
-
-        System.out.println("ingrese el nombre del cliente");
+        // Nombre y apellido del Cliente
+        System.out.println("ingrese el nombre y apellido del cliente");
         Scanner nombre_cliente = new Scanner(System.in);
         String nombre = nombre_cliente.nextLine();
         cliente1.setNombre(nombre);
@@ -61,7 +60,7 @@ public class App {
         cliente1.setCedula(cedula);
 
         // Fecha de incorporación del Cliente
-        System.out.println("ingrese la fecha de incorporacion del cliente");
+        System.out.println("ingrese la fecha de incorporacion del cliente (dd/mm/yyyy):");
         Scanner fecha_cliente = new Scanner(System.in);
         String fecha = fecha_cliente.nextLine();
         cliente1.setFecha(fecha);
@@ -83,26 +82,14 @@ public class App {
         // Agregar el cliente a la lista de clientes
         mis_clientes.add(cliente1);
 
-
-
     }
 
+    // Método para listar todos los clientes del banco
+    public static void listar_clientes() {
 
+        for ( int i = 0; i < mis_clientes.size(); i++){
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            System.out.println("Cliente " + (i + 1) + ": " + mis_clientes.get(i).getNombre() + " y su ahorro es: " + mis_clientes.get(i).getAhorro());
+        }
+    }
 }
-
