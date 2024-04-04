@@ -205,11 +205,6 @@ public class App {
         }
     }
 
-
-
-
-
-
     // Método para calcular el CDT del cliente
     public static void cdt_cliente(){
         //Se busca el cliente por el nombre
@@ -239,3 +234,5 @@ public class App {
 
     }
 }
+
+// Prueba Final
