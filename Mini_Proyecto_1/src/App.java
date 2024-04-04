@@ -25,6 +25,7 @@ public class App {
             System.out.println("4. eliminar dinero de un cliente");
             System.out.println("5. Buscar cliente por nombre");
             System.out.println("6. Solicitar Prestamo");
+            System.out.println("7. Calcular CDT del cliente");
             System.out.println("0. salir");
 
             opcion = scanner_opcion.nextByte();
@@ -46,6 +47,9 @@ public class App {
                     break;
                 case 6:
                     prestamo_cliente();//Llamar al método para solicitar prestamo
+                    break;
+                case 7:
+                    cdt_cliente();//Llamar al método para calcular el CDT del cliente
                     break;
             }
         } while (opcion != 0); //Condición para cerrar el bucle
@@ -204,4 +208,34 @@ public class App {
 
 
 
+
+
+    // Método para calcular el CDT del cliente
+    public static void cdt_cliente(){
+        //Se busca el cliente por el nombre
+        System.out.println("Ingrese el nombre del cliente que desea buscar");
+        Scanner scannerbusc = new Scanner(System.in);
+        String nombrec = scannerbusc.nextLine();
+        
+        //El cliente elije el tiempo de su CDT
+        System.out.println("elija  por cuanto tiempo quiere su CDT , 3 0 6 meses");
+        Scanner sncannercdt= new Scanner(System.in);
+        byte cdt= sncannercdt.nextByte();
+        //Se valoran las condiciones para validar el CDT
+         for (int i = 0; i < mis_clientes.size(); i++) {
+            if (nombrec.equals(mis_clientes.get(i).getNombre()) && cdt == 3) {
+                double total = mis_clientes.get(i).getAhorro()+(mis_clientes.get(i).getAhorro()*0.03*(3.0/12.0));
+                System.out.println("su ganancia total es " + total+ " cop");
+            } else if (nombrec.equals(mis_clientes.get(i).getNombre()) && cdt == 6) {
+        
+                double total2 = mis_clientes.get(i).getAhorro()+(mis_clientes.get(i).getAhorro()*0.05*(3.0/12.0));
+                System.out.println("su ganancia total es " + total2 + " cop");
+
+            }
+            else{
+                System.out.println("el CDT no funciona");
+            }
+        }
+
+    }
 }
