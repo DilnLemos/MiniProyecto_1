@@ -23,6 +23,7 @@ public class App {
             System.out.println("2. listar los clientes");
             System.out.println("3. Actualizar dinero de un cliente");
             System.out.println("4. eliminar dinero de un cliente");
+            System.out.println("5. Buscar cliente por nombre");
             System.out.println("0. salir");
 
             opcion = scanner_opcion.nextByte();
@@ -38,6 +39,9 @@ public class App {
                     break;
                 case 4:
                     eliminar_dinero_ahorrado(); // Llamar al método para eliminar dinero ahorrado de un cliente
+                    break;
+                case 5:
+                    buscar_cliente_por_nombre(); // Llamar al método para buscar un cliente por nombre
                     break;
                 
             }
@@ -141,6 +145,23 @@ public class App {
         }        
     }
 }
+
+// Método para buscar un cliente por nombre
+    public static void buscar_cliente_por_nombre() {
+        System.out.println("Ingrese el nombre del cliente que desea buscar");
+        Scanner scannerbus = new Scanner(System.in);
+        String nombre = scannerbus.nextLine();
+
+    // Buscar al cliente por nombre y mostrar su información
+        for (int i = 0; i < mis_clientes.size(); i++) {
+            if (nombre.equals(mis_clientes.get(i).getNombre())) {
+            System.out.println(mis_clientes.get(i).getNombre() + " Su Ahorro: " + mis_clientes.get(i).getAhorro() + " cop");
+        }   else {
+             System.err.println("el cliente no existe"); // Mostrar un mensaje de error si el cliente no se encuentra
+        }
+    }
+}
+
 
 
 
