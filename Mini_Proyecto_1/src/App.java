@@ -24,6 +24,7 @@ public class App {
             System.out.println("3. Actualizar dinero de un cliente");
             System.out.println("4. eliminar dinero de un cliente");
             System.out.println("5. Buscar cliente por nombre");
+            System.out.println("6. Solicitar Prestamo");
             System.out.println("0. salir");
 
             opcion = scanner_opcion.nextByte();
@@ -43,7 +44,9 @@ public class App {
                 case 5:
                     buscar_cliente_por_nombre(); // Llamar al método para buscar un cliente por nombre
                     break;
-                
+                case 6:
+                    prestamo_cliente();//Llamar al método para solicitar prestamo
+                    break;
             }
         } while (opcion != 0); //Condición para cerrar el bucle
     }
@@ -162,6 +165,41 @@ public class App {
     }
 }
 
+    // Método para hacer un préstamo al cliente
+    public static void prestamo_cliente(){
+        double cuota_mensual, interes;
+        //Se ingresa el cliente que solicitará el prestamo
+        System.out.println("Ingrese el nombre del cliente que desea buscar");
+        Scanner scannerpcl = new Scanner(System.in);
+        String nombre = scannerpcl.nextLine();
+        //Se ingresa la cantidad de dinero que quiere prestar el cliente
+        System.out.println("Ingrese la cantidad de dinero que quiere prestar");
+        Scanner scannerprest = new Scanner(System.in);
+        int prestamo = scannerprest.nextInt();
+        
+        //Se busca al cliente por nombre y se valoran las condiciones para validar el prestemo
+        for (int i = 0; i < mis_clientes.size(); i++) {
+            if (nombre.equals(mis_clientes.get(i).getNombre())) {
+               if (prestamo <= mis_clientes.get(i).getAhorro()) {
+                mis_clientes.get(i).setAhorro(mis_clientes.get(i).getAhorro() + prestamo);
+                System.out.println("Su ahorro despues del prestamo es: " + mis_clientes.get(i).getAhorro() + " cop");
+               }else {
+                    if (prestamo <= (mis_clientes.get(i).getAhorro() * 2)){
+                        mis_clientes.get(i).setAhorro(mis_clientes.get(i).getAhorro() + prestamo);
+                        interes = (prestamo / 6);
+                        cuota_mensual = ((0.001651581302 * prestamo) + interes);
+                        System.out.println("La cuota mensual de su prestamo es de: "+ cuota_mensual + " cop");
+                        System.out.println("Su ahorro despues del prestamo es: " + mis_clientes.get(i).getAhorro() + " cop");
+                        //Si el presamos no es valido se muestra el mensaje en pantalla
+                    }else {
+                        System.out.println("Su prestamo no puede ser mayor que el doble de su ahorro");
+                    }
+               }   
+            } else {
+                System.err.println("el cliente no existe");
+                }
+        }
+    }
 
 
 
