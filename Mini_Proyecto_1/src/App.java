@@ -22,6 +22,7 @@ public class App {
             System.out.println("1. ingresar un cliente");
             System.out.println("2. listar los clientes");
             System.out.println("3. Actualizar dinero de un cliente");
+            System.out.println("4. eliminar dinero de un cliente");
             System.out.println("0. salir");
 
             opcion = scanner_opcion.nextByte();
@@ -34,6 +35,9 @@ public class App {
                     break;
                 case 3:
                     actualizar_dinero_ahorrado(); // Llamar al método para actualizar el dinero ahorrado de un cliente
+                    break;
+                case 4:
+                    eliminar_dinero_ahorrado(); // Llamar al método para eliminar dinero ahorrado de un cliente
                     break;
                 
             }
@@ -93,7 +97,7 @@ public class App {
 
         for ( int i = 0; i < mis_clientes.size(); i++){
 
-            System.out.println("Cliente " + (i + 1) + ": " + mis_clientes.get(i).getNombre() + " y su ahorro es: " + mis_clientes.get(i).getAhorro());
+            System.out.println("Cliente " + (i + 1) + ": " + mis_clientes.get(i).getNombre() + " y su ahorro es: " + mis_clientes.get(i).getAhorro()+" cop");
         }
     }
 
@@ -114,4 +118,31 @@ public class App {
     }
 
 }
+
+   // Método para eliminar dinero ahorrado de un cliente
+   public static void eliminar_dinero_ahorrado() {
+    System.out.println("Ingrese su nombre para eliminar su ahorro");
+    Scanner scannerelim = new Scanner(System.in);
+    String comparazao = scannerelim.nextLine();
+
+    // Buscar al cliente por nombre y eliminar una cantidad específica de su ahorro
+    for (int i = 0; i < mis_clientes.size(); i++) {
+        if (comparazao.equals(mis_clientes.get(i).getNombre())) {
+            System.out.println("Ingrese la cantidad de dinero que desea eliminar de su ahorro");
+            int dinero = scannerelim.nextInt();
+            if (dinero <= mis_clientes.get(i).getAhorro()) {
+                mis_clientes.get(i).setAhorro(mis_clientes.get(i).getAhorro() - dinero);
+                System.out.println("El nuevo ahorro de " + mis_clientes.get(i).getNombre() + " es de " + mis_clientes.get(i).getAhorro() + " cop");
+            } else {
+                System.err.println("No se puede eliminar más dinero que su ahorro"); // Mostrar un mensaje de error si la cantidad a eliminar es mayor que el ahorro del cliente
+                break;
+            }
+            return;
+        }        
+    }
+}
+
+
+
+
 }
